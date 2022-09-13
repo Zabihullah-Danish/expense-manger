@@ -15,7 +15,8 @@ class ExpenseCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $expense_categories = ExpenseCategory::all();
+        return view('categories.expenses.index',compact('expense_categories'));
     }
 
     /**
@@ -25,7 +26,7 @@ class ExpenseCategoryController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -36,7 +37,13 @@ class ExpenseCategoryController extends Controller
      */
     public function store(StoreExpenseCategoryRequest $request)
     {
-        //
+        // dd($request->all());
+        ExpenseCategory::create([
+            'name' => $request->expense_category,
+
+        ]);
+
+        return back()->with('message','Expense Category Added Successfully');
     }
 
     /**

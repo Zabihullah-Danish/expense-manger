@@ -24,7 +24,11 @@ class StoreIncomeRequest extends FormRequest
     public function rules()
     {
         return [
-            
+            'account_id' => 'required',
+            'income_title' => 'required|max:255',
+            'income_category' => 'required',
+            'description' => 'max:1000',
+            'income_amount' => 'required|numeric',
         ];
     }
 }

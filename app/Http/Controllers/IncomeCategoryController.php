@@ -15,7 +15,8 @@ class IncomeCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $income_categories = IncomeCategory::all();
+        return view('categories.incomes.index', compact('income_categories'));
     }
 
     /**
@@ -36,7 +37,12 @@ class IncomeCategoryController extends Controller
      */
     public function store(StoreIncomeCategoryRequest $request)
     {
-        //
+        $income = $request->income_category;
+        // dd($income);
+        IncomeCategory::create([
+            'name' => $income,
+        ]);
+        return back()->with('message','Category added.');
     }
 
     /**

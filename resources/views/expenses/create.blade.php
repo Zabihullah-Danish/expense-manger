@@ -5,15 +5,15 @@
         @endif
         <div class="p-1 border rounded-md shadow m-1">
             <div class="flex flex-row justify-between">
-                <h1 class=" font-bold text-base">Add income</h1>
+                <h1 class=" font-bold text-base">Add Expense</h1>
                 <div class="flex flex-row space-x-1">
-                    <a class="rounded-md bg-blue-500 text-white px-2 py-1" href="{{ route('incomes.index') }}">List incomes</a>
+                    <a class="rounded-md bg-blue-500 text-white px-2 py-1" href="{{ route('expenses.index') }}">All Expenses</a>
                     <button onclick="back()" class="rounded-md bg-gray-500 hover:bg-gray-600 text-white text-sm px-2 py-1">Back</button>
                 </div>
                 
             </div>
             <div class="py-10 px-1">
-                <form action="{{ route('incomes.store') }}" method="POST">
+                <form action="{{ route('expenses.store') }}" method="POST">
                     @csrf
                 <div class="flex flex-col space-y-3">
 
@@ -36,29 +36,29 @@
 
                     <div class="flex flex-row text-xs">
                         <div class="w-1/6">
-                            <label class="p-2" for="income_title">Income title</label>
+                            <label class="p-2" for="expense_title">Expense title</label>
                         </div>
                         <div class="w-5/6">
-                            <input class="w-full border rounded-md p-1 outline-none" type="text" name="income_title" id="income_title"
-                             value="{{ old('income_title') }}" placeholder="Title...">
-                            @error('income_title') <p class="text-xs text-red-500">{{ $message }}</p> @enderror
+                            <input class="w-full border rounded-md p-1 outline-none" type="text" name="expense_title" id="expense_title"
+                             value="{{ old('expense_title') }}" placeholder="Title...">
+                            @error('expense_title') <p class="text-xs text-red-500">{{ $message }}</p> @enderror
                         </div>
                     </div>
 
                     <div class="flex flex-row text-xs">
                         <div class="w-1/6">
-                            <label class="p-2" for="income_category">Income category</label>
+                            <label class="p-2" for="expense_category">Exepnse category</label>
                         </div>
                         <div class="w-5/6">
-                            <select class="w-full border rounded-md p-1 outline-none" name="income_category" id="income_category">
+                            <select class="w-full border rounded-md p-1 outline-none" name="expense_category" id="expense_category">
                                 @forelse ($categories as $category)
-                                    <option value="{{ $category->name }}" {{ old('income_category') == $category->name ? 'selected' : '' }}>{{ $category->name }}</option>
+                                    <option value="{{ $category->name }}" {{ old('expense_category') == $category->name ? 'selected' : '' }}>{{ $category->name }}</option>
                                 @empty
                                 <option value="">No category</option>
                                 @endforelse
                                 
                             </select>
-                            @error('income_category') <p class="text-xs text-red-500">{{ $message }}</p> @enderror
+                            @error('expense_category') <p class="text-xs text-red-500">{{ $message }}</p> @enderror
                         </div>
                     </div>
 
@@ -68,19 +68,19 @@
                         </div>
                         <div class="w-5/6">
                             <textarea class="w-full border rounded-md p-1 outline-none" rows="6" name="description" id="description"
-                             placeholder="income descritption...">{{ old('description') }}</textarea>
+                             placeholder="expense descritption...">{{ old('description') }}</textarea>
                             @error('description') <p class="text-xs text-red-500">{{ $message }}</p> @enderror
                         </div>
                     </div>
 
                     <div class="flex flex-row text-xs">
                         <div class="w-1/6">
-                            <label class="p-2" for="income_amount">Income amount</label>
+                            <label class="p-2" for="expense_amount">Expense amount</label>
                         </div>
                         <div class="w-5/6">
-                            <input class="w-full border rounded-md p-1 outline-none" type="number" name="income_amount" id="income_amount"
-                             value="{{ old('income_amount') }}" placeholder="100$">
-                            @error('income_amount') <p class="text-xs text-red-500">{{ $message }}</p> @enderror
+                            <input class="w-full border rounded-md p-1 outline-none" type="number" name="expense_amount" id="expense_amount"
+                             value="{{ old('expense_amount') }}" placeholder="100$">
+                            @error('expense_amount') <p class="text-xs text-red-500">{{ $message }}</p> @enderror
                         </div>
                     </div>
 

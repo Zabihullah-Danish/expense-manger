@@ -1,10 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\IncomeController;
+use App\Http\Controllers\IncomeCategoryController;
+use App\Http\Controllers\ExpenseCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,8 +31,7 @@ Route::middleware('auth')->group(function(){
     })->name('dashboard');
     
     // accounts route
-    Route::get('/accounts/info/{account}',[AccountController::class,'selectedAccount'])->name('selectedAccount');
-    Route::resource('/accounts',AccountController::class);
+    Route::resource('accounts',AccountController::class);
 
     Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 
@@ -37,8 +39,16 @@ Route::middleware('auth')->group(function(){
     Route::get('/profile/update',[AuthController::class,'profile'])->name('profile');
     Route::post('/profile/update/{id}',[AuthController::class,'updateProfile'])->name('updateProfile');
 
-    //income routes
+    //income and expense routes
+    // Route::get('/incomes',[IncomeController::class,'index'])->name('incomes.index');
+    // Route::get('/incomes/create',[IncomeController::class,'create'])->name('incomes.create');
+    // Route::get('/incomes/edit/{income}',[IncomeController::class,'edit'])->name('incomes.edit');
+
     Route::resource('incomes',IncomeController::class);
+    Route::resource('expenses',ExpenseController::class);
+    //income and expense category
+    Route::resource('/income-categories',IncomeCategoryController::class);
+    Route::resource('/expense-categories',ExpenseCategoryController::class);
 
 });
 

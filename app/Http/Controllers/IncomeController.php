@@ -23,9 +23,9 @@ class IncomeController extends Controller
         }
         
         $selectedAccount = Account::find(request()->accounts);
-        // dd($selectedAccount);
+        $selectedAccountIncome = Income::where('account_id',$selectedAccount->id)->get();
         
-        return view('incomes.index',compact('accounts','selectedAccount'));
+        return view('incomes.index',compact('accounts','selectedAccount','selectedAccountIncome'));
         
     }
 
@@ -53,7 +53,7 @@ class IncomeController extends Controller
         Income::create([
             'account_id' => $request->account_id,
             'income_title' => $request->income_title,
-            'income_category' => $request->income_category ?? "Sport",
+            'income_category' => $request->income_category,
             'description' => $request->description,
             'income_amount' => $request->income_amount,
         ]);
@@ -79,8 +79,11 @@ class IncomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Income $income)
-    {
-        //
+    {   
+        $categories = IncomeCategory::all();
+        $account = $income->account;
+        // dd($account);
+        return view('incomes.edit',compact('income','categories','account'));
     }
 
     /**
@@ -92,7 +95,15 @@ class IncomeController extends Controller
      */
     public function update(UpdateIncomeRequest $request, Income $income)
     {
-        //
+        $income->update([
+            'account_id' => $request->account_id,
+            'income_title' => $request->income_title,
+            'income_category' => $request->income_category,
+            'description' => $request->description,
+            'income_amount' => $request->income_amount,
+        ]);
+
+        return back()->with('message','Record Updated Successfully');
     }
 
     /**

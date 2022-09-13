@@ -148,8 +148,11 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'income_category' => [
+            'unique' => 'This category already exist, please try a new',
+        ],
+        'expense_category' => [
+            'unique' => 'This category already exist, plase try a new',
         ],
     ],
 

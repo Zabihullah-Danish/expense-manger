@@ -19,7 +19,7 @@
     <div class="max-w-5xl h-[700px] overflow-hidden mx-auto @if(!Auth::user()) bg-gray-800 @else bg-white @endif rounded-b-md border shadow-2xl">
         <div class="@if(!Auth::user()) hidden @endif">
             <div class="flex flex-col" x-data="{IsMenuOpen: true}">
-                <div class="flex flex-row">
+                <div class="flex flex-row top-0 sticky bg-white">
                     <div class="w-1/6  mx-auto text-center" x-show="IsMenuOpen">
                         <img class="mx-auto w-16" src="{{ asset('storage/icons/logo.png') }}" alt="">
                     </div>
@@ -29,30 +29,6 @@
                                 <button class="p-2" @click="IsMenuOpen = !IsMenuOpen">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="ionicon w-6" viewBox="0 0 512 512"><title>Menu</title><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M80 160h352M80 256h352M80 352h352"/></svg>
                                 </button>
-                                <div>
-                                    {{-- @auth
-                                        
-                                    
-                                    @php
-                                        $accounts = Auth::user()->accounts;
-                                        // echo $accounts;
-                                    @endphp
-                                    <form class="flex">
-                                    <select onchange="this.form.submit()" class="p-2 rounded-md bg-white border border-gray-100" name="select-account" id="select-account">
-                                        <option selected disabled>Select account</option>
-                                        @foreach($accounts as $account)
-                                            
-                                            <option value="{{ $account->name }}" formaction="{{ route('selectedAccount',$account) }}">{{ $account->name }}</option>
-                                            
-                                            
-                                        @endforeach
-                                    </select>
-                                    <button type="button" class="bg-gray-200 text-blue-500 hover:bg-gray-300 rounded-tr-full rounded-br-full">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon w-6" viewBox="0 0 512 512"><title>Enter</title><path d="M176 176v-40a40 40 0 0140-40h208a40 40 0 0140 40v240a40 40 0 01-40 40H216a40 40 0 01-40-40v-40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M272 336l80-80-80-80M48 256h288"/></svg>
-                                    </button>
-                                    </form>
-                                    @endauth --}}
-                                </div>
                             </div>
                             <div class="flex flex-row space-x-1">
                                 <div>
@@ -69,7 +45,7 @@
                                     </button>
                                     <ul @click.away="open = false" x-show="open"
                                         x-transition.duration.100ms.origin.top 
-                                        class="absolute bg-white border border-gray-500 rounded-md w-auto mt-4 text-xs -ml-24 shadow-md" style="display: none;">
+                                        class="absolute bg-white border border-gray-500 rounded-md w-auto mt-4 text-xs -ml-24 shadow-md z-50" style="display: none;">
                                         <li><a class=" hover:bg-gray-100 p-2 rounded flex flex-row space-x-2" href="{{ route('profile') }}">
                                             
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ionicon w-4" viewBox="0 0 512 512"><title>Person Circle</title><path d="M258.9 48C141.92 46.42 46.42 141.92 48 258.9c1.56 112.19 92.91 203.54 205.1 205.1 117 1.6 212.48-93.9 210.88-210.88C462.44 140.91 371.09 49.56 258.9 48zm126.42 327.25a4 4 0 01-6.14-.32 124.27 124.27 0 00-32.35-29.59C321.37 329 289.11 320 256 320s-65.37 9-90.83 25.34a124.24 124.24 0 00-32.35 29.58 4 4 0 01-6.14.32A175.32 175.32 0 0180 259c-1.63-97.31 78.22-178.76 175.57-179S432 158.81 432 256a175.32 175.32 0 01-46.68 119.25z"/><path d="M256 144c-19.72 0-37.55 7.39-50.22 20.82s-19 32-17.57 51.93C191.11 256 221.52 288 256 288s64.83-32 67.79-71.24c1.48-19.74-4.8-38.14-17.68-51.82C293.39 151.44 275.59 144 256 144z"/></svg>
@@ -92,9 +68,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-row">
+                <div class="flex flex-row  h-[625px]">
                     <div class="w-1/6"  x-show="IsMenuOpen">
-                        <div class="flex flex-col min-h-screen bg-gray-500 text-gray-200 text-sm" x-data="{
+                        <div class="flex h-[625px] flex-col bg-gray-500 text-gray-200 text-sm" x-data="{
                             incomes:false,
                             expenses:false,
                             categories:false,
@@ -128,8 +104,8 @@
                                   
                                 </button>
                                 <ul @click.outside = "expenses = false" x-show="expenses" x-transition.duration.100ms class="bg-gray-600 py-2" style="display: none;">
-                                    <li class="pl-3 hover:bg-gray-900"><a class="block p-2" href="{{ route('incomes.index') }}">&Rarr; List Expenses</a></li>
-                                    <li class="pl-3 hover:bg-gray-900"><a class="block p-2" href="{{ route('incomes.create') }}">&Rarr; Create New</a></li>
+                                    <li class="pl-3 hover:bg-gray-900"><a class="block p-2" href="{{ route('expenses.index') }}">&Rarr; List Expenses</a></li>
+                                    <li class="pl-3 hover:bg-gray-900"><a class="block p-2" href="{{ route('expenses.create') }}">&Rarr; Create New</a></li>
                                 </ul>
                             </div>
                             <div>
@@ -141,8 +117,8 @@
                                   
                                 </button>
                                 <ul @click.outside = "categories = false" x-show="categories" x-transition.duration.100ms class="bg-gray-600 py-2" style="display: none;">
-                                    <li class="pl-3 hover:bg-gray-900"><a class="block p-2" href="">&Rarr; All Categories</a></li>
-                                    <li class="pl-3 hover:bg-gray-900"><a class="block p-2" href="">&Rarr; Create New</a></li>
+                                    <li class="pl-3 hover:bg-gray-900"><a class="block p-2" href="{{ route('income-categories.index') }}">&Rarr; Incomes</a></li>
+                                    <li class="pl-3 hover:bg-gray-900"><a class="block p-2" href="{{ route('expense-categories.index') }}">&Rarr; Expenses</a></li>
                                 </ul>
                             </div>
                             <div>
@@ -177,7 +153,7 @@
                            
                         </div>
                     </div>
-                    <div class="w-5/6 border">
+                    <div class="w-5/6 border overflow-y-auto">
                         {{ $content }}
                     </div>
                 </div>
@@ -194,5 +170,10 @@
     </div>
     
     @livewireScripts
+    <script>
+        function back(){
+            history.back();
+        }
+    </script>
 </body>
 </html>

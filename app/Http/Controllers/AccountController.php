@@ -27,7 +27,7 @@ class AccountController extends Controller
      */
     public function create()
     {
-        return view('accounts/create');
+        return view('accounts.create');
     }
 
     /**
@@ -46,7 +46,7 @@ class AccountController extends Controller
             'initial_amount' => $request->initial_amount,
             'account_for' => $request->account_for,
         ]);
-        return redirect()->route('accounts.index');
+        return redirect()->route('accounts.index')->with('message','Account added');
     }
 
     /**
@@ -68,7 +68,7 @@ class AccountController extends Controller
      */
     public function edit(Account $account)
     {
-        //
+        return view('accounts.edit',compact('account'));
     }
 
     /**
@@ -80,9 +80,16 @@ class AccountController extends Controller
      */
     public function update(UpdateAccountRequest $request, Account $account)
     {
-        //
-    }
+        $account->update([
+            'name' => $request->name,
+            'account_number' => $request->account_number,
+            'currency' => $request->currency,
+            'initial_amount' => $request->initial_amount,
+            'account_for' => $request->account_for
+        ]);
 
+        return redirect()->route('accounts.index')->with('message','Account Updated');
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -91,10 +98,10 @@ class AccountController extends Controller
      */
     public function destroy(Account $account)
     {
-        //
+        $account->delete();
+        $deleted = true;
+        return back()->with('warning','Account deleted');
     }
 
-    public function selectedAccount(Account $account){
-        dd($account);
-    }
+    
 }

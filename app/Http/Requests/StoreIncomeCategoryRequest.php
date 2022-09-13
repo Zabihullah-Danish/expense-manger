@@ -13,7 +13,7 @@ class StoreIncomeCategoryRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class StoreIncomeCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'income_category' => 'required|unique:income_categories,name',
         ];
     }
 }

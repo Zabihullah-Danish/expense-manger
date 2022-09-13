@@ -13,7 +13,7 @@ class StoreExpenseRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class StoreExpenseRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'account_id' => 'required',
+            'expense_category' => 'required',
+            'expense_title' => 'required|max:3000|string',
+            'description' => 'required|max:500',
+            'expense_amount' => 'required|numeric'
         ];
     }
 }
